@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<database:Schema
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:database="http://database/1.0">
+  <tables name="Persona"
+      primaryKey="//@tables.0/@columns.0">
+    <columns
+        name="id"
+        type="integer"/>
+  </tables>
+</database:Schema>

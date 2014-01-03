@@ -1,0 +1,64 @@
+@gmf(foo="foo")
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot")
+@namespace(uri="http://defaultname/1.0", prefix="defaultname")
+package defaultname;
+
+@Ecore(constraints="nameEmpty illegalName")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(nameEmpty="not (self.name
+			->isEmpty())", illegalName="Sequence{1 .. self.name.size()}
+			->collect(i | self.name.substring(i, i))
+			->excludes(' ')")
+abstract class DataBaseElement {
+  attr String name;
+}
+
+enum RailsData {
+  binary = 0;
+  boolean = 1;
+  date = 2;
+  dateTime = 3;
+  decimal = 4;
+  float = 5;
+  integer = 6;
+  string = 7;
+  text = 8;
+  time = 9;
+  timestamp = 10;
+}
+
+@Ecore(constraints="tableNameUnique")
+@gmf.diagram(foo="foo")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(tableNameUnique="self.tables
+			->isUnique(name.toUpperCase())")
+class Schema extends DataBaseElement {
+  val Table[*] tables;
+}
+
+@Ecore(constraints="noIdName columnNameUnique cycleForeignKey")
+@gmf.node(tool.description="Table", tool.name="Table", border.color="0,0,0", label="name", label.placement="internal", label.icon="false")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(noIdName="not (self.columns
+			->exists(name.toUpperCase() = 'id'.toUpperCase()))", columnNameUnique="self.columns
+			->isUnique(name.toUpperCase())", cycleForeignKey="not(self.foreignKeys
+			->notEmpty() and self.foreignKeys
+			->exists(reference.name = self.name))")
+class Table extends DataBaseElement {
+
+  @gmf.compartment(layout="list")
+  val Column[+] columns;
+  ref Column[1] primaryKey;
+  val ForeignKey[*] foreignKeys;
+}
+
+@gmf.node(tool.description="Column", tool.name="Column", label="name,type", figure="rectangle", label.icon="true", label.pattern="{0}:{1}")
+class Column extends DataBaseElement {
+  attr RailsData type;
+}
+
+@Ecore(constraints="sameTypeAtLink")
+@gmf.link(tool.description="Foreign Key", tool.name="Foreign Key", source="column", target="reference", target.decoration="arrow")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(sameTypeAtLink="self.column.type = self.reference.primaryKey.type")
+class ForeignKey {
+  ref Column[1] column;
+  ref Table[1] reference;
+}
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="" modelDirectory="/DataBaseEditor/src" modelPluginID="DataBaseEditor"
+    modelName="Database" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>dataBase.ecore</foreignModel>
+  <genPackages prefix="Database" disposableProviderFactory="true" ecorePackage="dataBase.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="dataBase.ecore#//RailsData">
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/binary"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/date"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/dateTime"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/decimal"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/float"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/integer"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/string"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/text"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/time"/>
+      <genEnumLiterals ecoreEnumLiteral="dataBase.ecore#//RailsData/timestamp"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="dataBase.ecore#//DataBaseElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dataBase.ecore#//DataBaseElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="dataBase.ecore#//Schema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dataBase.ecore#//Schema/tables"/>
+    </genClasses>
+    <genClasses ecoreClass="dataBase.ecore#//Table">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dataBase.ecore#//Table/columns"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dataBase.ecore#//Table/primaryKey"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dataBase.ecore#//Table/foreignKeys"/>
+    </genClasses>
+    <genClasses ecoreClass="dataBase.ecore#//Column">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dataBase.ecore#//Column/type"/>
+    </genClasses>
+    <genClasses ecoreClass="dataBase.ecore#//ForeignKey">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dataBase.ecore#//ForeignKey/column"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dataBase.ecore#//ForeignKey/reference"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

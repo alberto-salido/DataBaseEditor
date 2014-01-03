@@ -1,0 +1,22 @@
+-- Find the compartment figure
+var tableColumnsCompartmentFigure = GmfGraph!Rectangle.all.
+    selectOne(r|r.name = 'TableColumnsCompartmentFigure');
+
+-- ... and add a stack layout to it
+tableColumnsCompartmentFigure.layout = new GmfGraph!StackLayout;
+
+-- Find the attribute figure
+var columnFigure = GmfGraph!Rectangle.all.
+    selectOne(r|r.name = 'ColumnFigure');
+
+-- ... delete its border
+delete columnFigure.border;
+
+-- ... set its outline to false
+columnFigure.outline = false;
+
+-- ... and add a preferred size to it
+var preferredSize = new GmfGraph!Dimension;
+preferredSize.dx = 100;
+preferredSize.dy = 16;
+columnFigure.preferredSize = preferredSize;
